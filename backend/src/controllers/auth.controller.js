@@ -58,7 +58,7 @@ export const login = async (req, res) => {
     if (!email || !password) {
       return res.status(400).json({ message: "Please fill in all fields" });
     }
-    const user = await newUser.findOne({ email });
+    const user = await User.findOne({ email });
 
     if (!user) {
       return res.status(400).json({ message: "Invalid Credentials" });
@@ -128,7 +128,7 @@ export const updateProfile = async (req, res) => {
 
 export const checkAuth = async (req, res) => {
   try {
-    req.status(200).json(req.user);
+    res.status(200).json(req.user);
   } catch (error) {
     console.log("Error in Check Auth Controller", error.message);
     res.status(500).json({ message: "Internal Server Error" });
